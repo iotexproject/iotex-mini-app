@@ -1,5 +1,3 @@
-import { WalletStore } from '@/store/wallet';
-import { RootStore } from '@dappworks/kit';
 import { Avatar } from '@nextui-org/react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
