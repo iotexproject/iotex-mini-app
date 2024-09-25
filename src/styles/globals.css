@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background-color: #47a3f3;
+  color: #fefefe;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  :focus {
+    outline: none;
+  }
+}
+
+@layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 47.4% 11.2%);
+
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 47.4% 11.2%);
+
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(222.2 47.4% 11.2%);
+
+    --border: hsl(253, 53%, 59%);
+    --input: hsl(214.3 31.8% 91.4%);
+
+    --primary: hsl(222.2 47.4% 11.2%);
+    --primary-foreground: hsl(210 40% 98%);
+
+    --secondary: hsl(253, 53%, 59%);
+    --secondary-foreground: hsl(210 40% 98%);
+
+    --accent: hsl(240, 5%, 96%);
+    --accent-foreground: hsl(222.2 47.4% 11.2%);
+
+    --destructive: hsl(0 100% 50%);
+    --destructive-foreground: hsl(210 40% 98%);
+
+    --ring: hsl(215 20.2% 65.1%);
+
+    --header: rgb(249 250 251 / 0.9);
+
+    --radius: 0.5rem;
+
+    --md-editor-bg: #fff;
+    --md-editor-text: hsl(222.2 47.4% 11.2%);
+    --md-editor-separator: #bcbcbe;
+    --md-editor-border: #e5e7eb;
+  }
+
+  .dark {
+    --background: hsl(224 71% 4%);
+    --foreground: hsl(213 31% 91%);
+
+    --muted: hsl(224, 20%, 19%);
+    --muted-foreground: hsl(215.4 16.3% 56.9%);
+
+    --popover: hsl(224 71% 4%);
+    --popover-foreground: hsl(215 20.2% 65.1%);
+
+    --card: hsl(224 71% 4%);
+    --card-foreground: hsl(213 31% 91%);
+
+    --border: hsl(253, 53%, 59%);
+    --input: hsl(216 34% 17%);
+
+    --primary: hsl(210 40% 98%);
+    --primary-foreground: hsl(222.2 47.4% 1.2%);
+
+    --secondary: hsl(253, 53%, 59%);
+    --secondary-foreground: hsl(210 40% 98%);
+
+    --accent: hsl(214, 9%, 15%);
+    --accent-foreground: hsl(210 40% 98%);
+
+    --destructive: hsl(0 63% 31%);
+    --destructive-foreground: hsl(210 40% 98%);
+
+    --ring: hsl(216 34% 17%);
+
+    --header: rgba(0, 0, 0, 0.8);
+
+    --radius: 0.5rem;
+
+    --md-editor-bg: #09090b;
+    --md-editor-text: hsl(210 40% 98%);
+    --md-editor-separator: #4b4b4d;
+    --md-editor-border: #27272a;
+  }
+}
+
+@layer components {
+}
+
+
+.fixed-table-left-column {
+  @apply table-fixed;
+}
+.fixed-table-left-column th:first-child {
+  @apply sticky left-0 z-20;
+}
+.fixed-table-left-column td:first-child {
+  @apply sticky left-0 z-20;
+}
+.fixed-table-left-column tr,
+.fixed-table-left-column th {
+  @apply bg-[#f8f8f8] dark:bg-[#212121];
+}
+.fixed-table-left-column td {
+  @apply bg-[#fff] dark:bg-[#181818];
+}
+.fixed-table-left-column tr:hover td {
+  @apply bg-[#fcfcfc] dark:bg-[#1a1a1a] !important;
+}
