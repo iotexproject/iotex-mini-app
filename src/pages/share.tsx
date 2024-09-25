@@ -1,4 +1,3 @@
-import { List } from '@telegram-apps/telegram-ui';
 import { Avatar } from '@nextui-org/react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
