@@ -16,3 +16,4 @@ yarn.lock
 .tsbuildinfo
 public/robots.txt
 public/sitemap*
+certificates
