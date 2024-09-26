@@ -1,24 +1,22 @@
-'use client';
-
 import { Avatar } from '@nextui-org/react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
 import Container from '@/components/Layout/Container';
-import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
+import { RootStore } from '@dappworks/kit';
+import { UserStore } from '@/store/user';
 
 
 const Home = observer(() => {
+  const user = RootStore.Get(UserStore);
 
-const { initDataRaw, initData } = retrieveLaunchParams();
-
-console.log('initDataRaw', initDataRaw, initData);
+  user.use()
 
   return (
     <Container className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div className="font-semibold text-lg flex items-center gap-2">
           <Avatar size="sm" src="https://image.mimo.exchange/0x778e131aa8260c1ff78007cade5e64820744f320/1.png?width=100"></Avatar>
-          <span>Hi,{initData?.user?.firstName}</span>
+          <span>Hi,{user.userInfo?.firstName}</span>
         </div>
         <div className="flex items-center gap-2 cursor-pointer">
           <Icon icon="ph:wallet-bold" width="2rem" height="2rem" />

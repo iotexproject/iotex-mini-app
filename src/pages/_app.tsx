@@ -39,7 +39,6 @@ const InitProvider = ({ children }) => {
 
 const MyApp = ({ Component, pageProps }) => {
   const didMount = useDidMount();
-  const isBrowser = typeof window !== 'undefined';
   if (process.env.NODE_ENV === 'development') {
     useTelegramMock();
   }
