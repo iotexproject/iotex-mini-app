@@ -1,3 +1,5 @@
+'use client';
+
 import { Avatar } from '@nextui-org/react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
@@ -7,9 +9,9 @@ import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 
 const Home = observer(() => {
 
-// const { initDataRaw, initData } = retrieveLaunchParams();
+const { initDataRaw, initData } = retrieveLaunchParams();
 
-// console.log('initDataRaw', initDataRaw, initData);
+console.log('initDataRaw', initDataRaw, initData);
 
   return (
     <Container className="flex flex-col gap-6">
