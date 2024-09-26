@@ -7,4 +7,6 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(relativeTime);
 
-export default dayjs;
+export {
+    dayjs
+};
