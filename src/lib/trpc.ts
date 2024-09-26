@@ -1,4 +1,4 @@
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import { createTRPCClient, createTRPCProxyClient, httpBatchLink } from '@trpc/client';
 import type { AppRouter } from '@/server/routers/_app';
 import superjson from 'superjson';
 import { RootStore } from '@dappworks/kit';
