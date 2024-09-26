@@ -18,7 +18,7 @@ console.log('initDataRaw', initDataRaw, initData);
       <div className="flex items-center justify-between">
         <div className="font-semibold text-lg flex items-center gap-2">
           <Avatar size="sm" src="https://image.mimo.exchange/0x778e131aa8260c1ff78007cade5e64820744f320/1.png?width=100"></Avatar>
-          <span>Hi,Test</span>
+          <span>Hi,{initData?.user?.firstName}</span>
         </div>
         <div className="flex items-center gap-2 cursor-pointer">
           <Icon icon="ph:wallet-bold" width="2rem" height="2rem" />
