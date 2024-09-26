@@ -32,9 +32,9 @@ export const authRouter = router({
         });
       }
       const parsedData = parseInitData(initData);
-      await dbClient`insert into user ${dbClient(
+      await dbClient`insert into public.user ${dbClient(
         {
-          telegram_id: parsedData.user?.id,
+          telegram_id: String(parsedData.user?.id),
           telegram_name: parsedData.user?.username,
         },
         'telegram_id',

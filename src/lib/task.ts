@@ -5,7 +5,6 @@ import {dayjs} from './dayjs';
 export function getEventId({ user_id, task_id, task_cycle }: { user_id: number; task_id: number; task_cycle: number }) {
     let event_id = "";
     let errMsg = "";
-    console.log('task_cycle', task_cycle)
     switch (task_cycle) {
       case TaskCycle.Once:
         event_id = `telegram-${user_id}-task_${task_id}`;

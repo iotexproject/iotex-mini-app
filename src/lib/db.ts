@@ -8,4 +8,5 @@ export const dbClient = postgres(process.env.DATABASE_URL!, {
   connection: {
     application_name: 'tg',
   },
+  debug: process.env.NODE_ENV === 'development',
 });
