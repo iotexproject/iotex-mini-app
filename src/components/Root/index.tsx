@@ -9,7 +9,7 @@ import { ErrorPage } from '@/components/ErrorPage';
 import { useTelegramMock } from '@/hooks/useTelegramMock';
 import { useDidMount } from '@/hooks/useDidMount';
 
-function App(props: PropsWithChildren) {
+function InitProvider(props: PropsWithChildren) {
   const lp = useLaunchParams();
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
@@ -49,7 +49,7 @@ function RootInner({ children }: PropsWithChildren) {
 
   return (
     <SDKProvider acceptCustomStyles debug={debug}>
-      <App>{children}</App>
+      <InitProvider>{children}</InitProvider>
     </SDKProvider>
   );
 }
