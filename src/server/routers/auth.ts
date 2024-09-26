@@ -6,7 +6,7 @@ import { router, publicProcedure, authProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { validate } from '@telegram-apps/init-data-node';
-import { parseInitData } from '@telegram-apps/sdk';
+import { parseInitData } from '@telegram-apps/sdk-react';
 import jwt from 'jsonwebtoken';
 import dayjs from 'dayjs';
 import { dbClient } from '@/lib/db';

@@ -12,6 +12,8 @@ import { DeviceDetectStore } from '@/store/deviceDetect';
 import { useEffect } from 'react';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
+import { SDKProvider } from '@telegram-apps/sdk-react';
+import { Root } from '@/components/Root';
 
 const MyApp = ({ Component, pageProps }) => {
   initStore();
@@ -20,13 +22,15 @@ const MyApp = ({ Component, pageProps }) => {
   useProgressBar();
 
   return (
-    <SessionProvider session={pageProps.session}>
-      <NextUIProvider>
-        <ThemeProvider attribute="class" enableSystem={false}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </NextUIProvider>
-    </SessionProvider>
+    <Root>
+      <SessionProvider session={pageProps.session}>
+        <NextUIProvider>
+          <ThemeProvider attribute="class" enableSystem={false}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </NextUIProvider>
+      </SessionProvider>
+    </Root>
   );
 };
 

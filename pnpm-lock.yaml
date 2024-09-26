@@ -47,9 +47,15 @@ importers:
       '@telegram-apps/init-data-node':
         specifier: ^1.0.4
         version: 1.0.4
-      '@telegram-apps/sdk':
+      '@telegram-apps/react-router-integration':
+        specifier: ^1.0.1
+        version: 1.0.1(@telegram-apps/sdk@1.1.3)(@types/react@18.2.8)(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@telegram-apps/sdk-react':
         specifier: ^1.1.3
-        version: 1.1.3
+        version: 1.1.3(@types/react@18.2.8)(react@18.3.1)
+      '@telegram-apps/telegram-ui':
+        specifier: ^2.1.8
+        version: 2.1.8(@types/react-dom@18.3.0)(@types/react@18.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tremor/react':
         specifier: ^3.17.0
         version: 3.18.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.13)
@@ -3226,6 +3232,10 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
 
+  '@remix-run/router@1.19.2':
+    resolution: {integrity: sha512-baiMx18+IMuD1yyvOGaHM9QrVUPGGG0jC+z+IPHnRJWUAUvaKuWKyE8gjDj2rzv3sz9zOGoRSPgeBVHRhZnBlA==}
+    engines: {node: '>=14.0.0'}
+
   '@rjsf/core@5.21.1':
     resolution: {integrity: sha512-qURYyhL5RO8S8mkBKFL506mzc20ywJiIQbByozUYudAc25TL7ebxskwscdwhMnuzqQbMjBBimvHJGjcwzfIVxQ==}
     engines: {node: '>=14'}
@@ -3380,8 +3390,35 @@ packages:
   '@telegram-apps/init-data-node@1.0.4':
     resolution: {integrity: sha512-x44QyMaoaR0KWZ40ZRPF/1Z4yQaTJfpwIK9XTAIsiw3a5WxZqPE4/ceqLzT0u2TjaRM+BQHl7RoKgnDz5DmJ1A==}
 
+  '@telegram-apps/react-router-integration@1.0.1':
+    resolution: {integrity: sha512-q5fC0ihXyUDqrSdLQ3u3gypmjI/rMU2mTHeAz9IU1F1bl5X+J17LxWmgLp+OlD0Y97bq2XYmc+UbKrYh+eN3Wg==}
+    peerDependencies:
+      '@telegram-apps/sdk': ^1
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+      react-router-dom: ^6.22.3
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@telegram-apps/sdk-react@1.1.3':
+    resolution: {integrity: sha512-osddnacMIC4/KPvghsHQysPsomNXFQkr2K1owoMgf8MzmPQ2qZahR98xjeUlWU0JTCG+aAY9OHaPUFDNoxW/Bg==}
+    peerDependencies:
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@telegram-apps/sdk@1.1.3':
     resolution: {integrity: sha512-gvcXNttbCouDNTxjDUbO5FS/BdaHYO0ibSddQxiYitShPIDZDxGon0Eh3OSsgUIVPSQSNdXqkXaeqYgA+jeY0A==}
+
+  '@telegram-apps/telegram-ui@2.1.8':
+    resolution: {integrity: sha512-Y4mIRzBJDerFvF6yzsfwHpu2tKEMHnnnQgdnLTwIdXNVPq/sJTaY66Qxbh9eeO5+tct01VcAx4E70/1fMvnp8A==}
+    engines: {node: '>=18.0.0', npm: '>=7.0.0'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
 
   '@tremor/react@3.18.3':
     resolution: {integrity: sha512-7QyGE2W9f2FpwH24TKy3/mqBgLl4sHZeQcXP3rxXZ8W2AUq7AVaG1+vIT3xXxISrkh7zknjWlZsuhoF8NWNVDw==}
@@ -3404,6 +3441,9 @@ packages:
 
   '@trpc/server@11.0.0-rc.532':
     resolution: {integrity: sha512-DhlNzpSS5VlliHXL8hH12cydUtRWbCE2Uk1Q+wTmKi1PlUwM4EPXwagBDt2KpVhiZ4AXHtdfoPhwo6h7So6O+g==}
+
+  '@twa-dev/types@7.10.0':
+    resolution: {integrity: sha512-BXHyNLXy+cPbOZ2qQq5ArPKcP4kUfuX3YBSFT0XUxtMNWAzvyMuYAiq59UTfQ8OnELXlfChrAoIT3c2pujBtcQ==}
 
   '@types/d3-array@3.2.1':
     resolution: {integrity: sha512-Y2Jn2idRrLzUfAKV2LyRImR+y4oa2AntrgID95SHJxuMUrkNXmanDSed71sRNZysveJVt1hLLemQZIady0FpEg==}
@@ -3717,6 +3757,12 @@ packages:
 
   '@webassemblyjs/wast-printer@1.12.1':
     resolution: {integrity: sha512-+X4WAlOisVWQMikjbcvY2e0rwPsKQ9F688lksZhBcPycBBuii3O7m8FACbDMWDojpAqvjIncrG8J0XHKyQfVeA==}
+
+  '@xelene/vaul-with-scroll-fix@0.1.4':
+    resolution: {integrity: sha512-R9J7y92rzZKIQLtFHKtzRsb4x8G26cvwGIDSf7OQZCdROFt7xic4Yz1BlFYjm8oiQsYV4SFSQfOzatZjvxz5XQ==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -6779,6 +6825,19 @@ packages:
     resolution: {integrity: sha512-vKpeHhI5OZvYn82kXOs1bC8aOXktGU5AmKAgaZS4F5JPburCtbmDPqE7Pzp+1kN4+Wb81LlF33VpGwWwtXem+w==}
     peerDependencies:
       react: '>= 16.3'
+
+  react-router-dom@6.26.2:
+    resolution: {integrity: sha512-z7YkaEW0Dy35T3/QKPYB1LjMK2R1fxnHO8kWpUMTBdfVzZrWOiY9a7CtN8HqdWtDUWd5FY6Dl8HFsqVwH4uOtQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
+  react-router@6.26.2:
+    resolution: {integrity: sha512-tvN1iuT03kHgOFnLPfLJ8V95eijteveqdOSk+srqfePtQvqCExB8eHOYnlilbOcyJyKnYkr1vJvf7YqotAJu1A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
 
   react-select@5.8.1:
     resolution: {integrity: sha512-RT1CJmuc+ejqm5MPgzyZujqDskdvB9a9ZqrdnVLsvAHjJ3Tj0hELnLeVPQlmYdVKCdCpxanepl6z7R5KhXhWzg==}
@@ -12523,6 +12582,8 @@ snapshots:
       '@react-types/shared': 3.24.1(react@18.3.1)
       react: 18.3.1
 
+  '@remix-run/router@1.19.2': {}
+
   '@rjsf/core@5.21.1(@rjsf/utils@5.21.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@rjsf/utils': 5.21.1(react@18.3.1)
@@ -12731,7 +12792,34 @@ snapshots:
     dependencies:
       '@telegram-apps/sdk': 1.1.3
 
+  '@telegram-apps/react-router-integration@1.0.1(@telegram-apps/sdk@1.1.3)(@types/react@18.2.8)(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@telegram-apps/sdk': 1.1.3
+      react: 18.3.1
+      react-router-dom: 6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.2.8
+
+  '@telegram-apps/sdk-react@1.1.3(@types/react@18.2.8)(react@18.3.1)':
+    dependencies:
+      '@telegram-apps/sdk': 1.1.3
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.2.8
+
   '@telegram-apps/sdk@1.1.3': {}
+
+  '@telegram-apps/telegram-ui@2.1.8(@types/react-dom@18.3.0)(@types/react@18.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@floating-ui/react-dom': 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      '@twa-dev/types': 7.10.0
+      '@xelene/vaul-with-scroll-fix': 0.1.4(@types/react-dom@18.3.0)(@types/react@18.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
 
   '@tremor/react@3.18.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.13)':
     dependencies:
@@ -12773,6 +12861,8 @@ snapshots:
       '@trpc/server': 11.0.0-rc.532
 
   '@trpc/server@11.0.0-rc.532': {}
+
+  '@twa-dev/types@7.10.0': {}
 
   '@types/d3-array@3.2.1': {}
 
@@ -13400,6 +13490,15 @@ snapshots:
     dependencies:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
+
+  '@xelene/vaul-with-scroll-fix@0.1.4(@types/react-dom@18.3.0)(@types/react@18.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -16885,6 +16984,18 @@ snapshots:
       react-draggable: 4.4.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - react-dom
+
+  react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@remix-run/router': 1.19.2
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 6.26.2(react@18.3.1)
+
+  react-router@6.26.2(react@18.3.1):
+    dependencies:
+      '@remix-run/router': 1.19.2
+      react: 18.3.1
 
   react-select@5.8.1(@types/react@18.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:

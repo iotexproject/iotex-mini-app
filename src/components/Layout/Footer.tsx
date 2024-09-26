@@ -7,7 +7,7 @@ const Footer = ({ className }: { className?: string }) => {
         <Icon icon="mdi:home-outline" width="1.3rem" height="1.3rem" />
         <div>Home</div>
       </a>
-      <a href="/" className="text-center flex flex-col items-center">
+      <a href="/share" className="text-center flex flex-col items-center">
         <Icon icon="material-symbols:share-outline" width="1.3rem" height="1.3rem" />
         <div>Share</div>
       </a>

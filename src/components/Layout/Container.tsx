@@ -1,12 +1,7 @@
-import { NextSeo } from 'next-seo';
 import { observer } from 'mobx-react-lite';
-import { cn, getCanonicalUrl } from '@/lib/utils';
-import { useRouter } from 'next/router';
-import Nav from './Nav';
+import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import Footer from './Footer';
-import Head from 'next/head';
-import { helper } from '@/lib/helper';
 
 const MyAppProvider = dynamic(() => import('./MyAppProvider').then((ctx) => ctx.MyAppProvider), {
   ssr: false,
@@ -32,15 +27,13 @@ function Container(props: ContainerProps) {
   const { className, footerClassName, showFooter = true, children, isDeveloperNav = false, ...customMeta } = props;
 
   return (
-    <>
       <WalletProvider>
-        <main id="skip" className={cn('min-h-[calc(100vh-70px)] py-6 px-4 box-border', className)}>
+        <main id="skip" className={cn('h-full py-6 px-4 box-border', className)}>
           {children}
         </main>
         <Footer />
         <MyAppProvider />
       </WalletProvider>
-    </>
   );
 }
 
