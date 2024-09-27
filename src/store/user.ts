@@ -1,40 +1,18 @@
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { RootStore, Store } from '@dappworks/kit';
+import { PromiseState, RootStore, Store } from '@dappworks/kit';
 import { api } from '@/lib/trpc';
 import { InitDataParsed, retrieveLaunchParams, User } from '@telegram-apps/sdk-react';
+import { useEffect } from 'react';
+import { TaskStore } from './task';
 
 
 export class UserStore implements Store {
   sid = 'user';
-  autoObservable = true;
+  autoObservable = false;
   id: string = '';
   token: string = '';
   initDataRaw: string = '';
   userInfo: User | null;
-  
-
-  get event() {
-    return RootStore.init().events;
-  }
-
-  wait() {
-    return new Promise<UserStore>((res, rej) => {
-      if (this.id && this.token) {
-        res(this);
-      }
-
-      //@ts-ignore
-      this.event.once('user:ready', (user) => {
-        res(this);
-      });
-    });
-  }
-
-  static wait() {
-    return RootStore.Get(UserStore).wait();
-  }
-
+ 
   get isLogin() {
     return !!this.token;
   }
@@ -43,34 +21,29 @@ export class UserStore implements Store {
     try {
       const { token } = await api.auth.signin.mutate({ initData: this.initDataRaw });
       this.token = token;
+      console.log('token', this.initDataRaw, this.userInfo, token)
+      RootStore.Get(TaskStore).getTasks.call()
     } catch (error) {
       console.error("Login failed:", error);
     }
   }
 
   initData({initDataRaw, initData} : {initDataRaw: string; initData: InitDataParsed}) {
-    this.setData({ userInfo: initData.user || null, initDataRaw });
+    this.setData({ userInfo: initData.user, initDataRaw });
+    const token = localStorage.getItem('')
   }
 
   setData(args: Partial<UserStore>) {
     Object.assign(this, args);
   }
 
-  ready(args: Partial<UserStore>) {
-    this.setData(args);
-    //@ts-ignore
-    this.event.emit('user:ready', this);
-  }
-
-  use() {
+  use( ) {
     const { initDataRaw, initData } = retrieveLaunchParams();
 
-    console.log('initDataRaw', initDataRaw, initData);
-
     useEffect(() => {
-      if(initDataRaw && initData) {
-        this.initData({initDataRaw, initData});
-        this.login()
+      if (initDataRaw && initData) {
+        this.initData({ initDataRaw, initData });
+        this.login();
       }
     }, [initDataRaw, initData]);
   }

@@ -3,7 +3,6 @@ import '../styles/nprogress.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import React, { useEffect } from 'react';
 import { ThemeProvider } from 'next-themes';
-import { SessionProvider } from 'next-auth/react';
 import { NextUIProvider } from '@nextui-org/react';
 import { SDKProvider, useLaunchParams, useMiniApp, useThemeParams, useViewport, bindMiniAppCSSVars, bindThemeParamsCSSVars, bindViewportCSSVars } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
@@ -11,6 +10,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ErrorPage } from '@/components/ErrorPage';
 import { useTelegramMock } from '@/hooks/useTelegramMock';
 import { useDidMount } from '@/hooks/useDidMount';
+import { initStore } from '@/store';
 
 const InitProvider = ({ children }) => {
   const lp = useLaunchParams();
@@ -38,24 +38,24 @@ const InitProvider = ({ children }) => {
 };
 
 const MyApp = ({ Component, pageProps }) => {
+  initStore();
   const didMount = useDidMount();
   if (process.env.NODE_ENV === 'development') {
     useTelegramMock();
   }
+
   return didMount ? (
-    <SessionProvider session={pageProps.session}>
-      <NextUIProvider>
-        <ThemeProvider attribute="class" enableSystem={false}>
-          <SDKProvider acceptCustomStyles debug={true}>
-            <InitProvider>
-              <ErrorBoundary fallback={ErrorPage}>
-                <Component {...pageProps} />
-              </ErrorBoundary>
-            </InitProvider>
-          </SDKProvider>
-        </ThemeProvider>
-      </NextUIProvider>
-    </SessionProvider>
+    <NextUIProvider>
+      <ThemeProvider attribute="class" enableSystem={false}>
+        <SDKProvider acceptCustomStyles debug={true}>
+          <InitProvider>
+            <ErrorBoundary fallback={ErrorPage}>
+              <Component {...pageProps} />
+            </ErrorBoundary>
+          </InitProvider>
+        </SDKProvider>
+      </ThemeProvider>
+    </NextUIProvider>
   ) : (
     <div className="root__loading">Loading</div>
   );

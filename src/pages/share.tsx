@@ -1,7 +1,9 @@
-import { Avatar, Button } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
 import Container from '@/components/Layout/Container';
+import { RootStore } from '@dappworks/kit/.';
+import { TaskStore } from '@/store/task';
 
 const SharePage = observer(() => {
 
@@ -16,12 +18,12 @@ const SharePage = observer(() => {
   ]
 
   return (
-    <Container className="flex flex-col gap-6 h-full pb-8 overflow-y-auto gap-4">
+    <Container className="flex flex-col h-full pb-8 overflow-y-auto gap-4">
       {
         tasks.map((task, index) => (
           <div key={index} className='p-2 border border-solid border-gray-400 rounded-lg flex items-center gap-2'>
             <div className='p-1 rounded-full bg-gray-400'>
-              <Icon icon="solar:refresh-outline" className='text-white' width="1.2rem" height="1.2rem" />
+              <Icon icon="solar:refresh-outline" className='text-white w-5 h-5' />
             </div>
             <div className='flex-1 flex flex-col gap-1'>
               <div className='text-sm'>{task.name}</div>

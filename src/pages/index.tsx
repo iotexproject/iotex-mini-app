@@ -4,22 +4,23 @@ import { Icon } from '@iconify/react';
 import Container from '@/components/Layout/Container';
 import { RootStore } from '@dappworks/kit';
 import { UserStore } from '@/store/user';
-
+import { useEffect } from 'react';
+import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 
 const Home = observer(() => {
-  const user = RootStore.Get(UserStore);
+  const { initData, initDataRaw } = retrieveLaunchParams();
 
-  user.use()
+  console.log('init', initData, initDataRaw)
 
   return (
     <Container className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div className="font-semibold text-lg flex items-center gap-2">
           <Avatar size="sm" src="https://image.mimo.exchange/0x778e131aa8260c1ff78007cade5e64820744f320/1.png?width=100"></Avatar>
-          <span>Hi,{user.userInfo?.firstName}</span>
+          <span>Hi,{initData?.user?.firstName}</span>
         </div>
         <div className="flex items-center gap-2 cursor-pointer">
-          <Icon icon="ph:wallet-bold" width="2rem" height="2rem" />
+          <Icon icon="ph:wallet-bold" className="w-8 h-8" />
         </div>
       </div>
       <div className="flex flex-col items-center justify-center rounded-lg h-[230px] shadow-lg bg-gradient-to-b from-[#865eff] to-[#65ead2]">

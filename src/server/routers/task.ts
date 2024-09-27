@@ -2,7 +2,7 @@
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
-import { router, authProcedure } from '../trpc';
+import { router, authProcedure, publicProcedure } from '../trpc';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { dbClient } from '@/lib/db';
@@ -61,8 +61,8 @@ export const taskRouter = router({
       })
       
     }),
-  totalPoint: authProcedure.output(z.number()).query(async ({ ctx }) => {
-    const res = await  kitDBService.analysis.fetch_user_point({
+  totalPoint: publicProcedure.output(z.number()).query(async ({ ctx }) => {
+    const res = await kitDBService.analysis.fetch_user_point({
       user_id: String(ctx.user?.data.user?.id!),
     });
     if (!res.ok) {
