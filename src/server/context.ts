@@ -27,10 +27,7 @@ export async function createContext(
   try {
     user = jwt.verify(bearToken, process.env.BOT_TOKEN!)
   } catch (error) {
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: error.message
-    })
+    console.error('error', error)
   }
   return {
     user
