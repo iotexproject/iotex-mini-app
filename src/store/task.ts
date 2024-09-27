@@ -49,6 +49,11 @@ export class TaskStore implements Store {
     }
   })
 
+  publicData() {
+    this.getTasks.getOrCall()
+    this.getTotalPoint.getOrCall()
+  }
+
   setData(args: Partial<TaskStore>) {
     Object.assign(this, args);
   }

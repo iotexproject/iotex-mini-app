@@ -24,7 +24,9 @@ export const authRouter = router({
     .mutation(async ({ input }) => {
       const { initData } = input;
       try {
-        validate(initData, process.env.BOT_TOKEN!);
+        validate(initData, process.env.BOT_TOKEN!, {
+          expiresIn: 86400 * 7,
+        });
       } catch (error) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
@@ -32,7 +34,6 @@ export const authRouter = router({
         });
       }
       const parsedData = parseInitData(initData);
-      console.log('parsedData', parsedData)
       await dbClient`insert into public.user ${dbClient(
         {
           telegram_id: String(parsedData.user?.id),
@@ -41,11 +42,12 @@ export const authRouter = router({
         'telegram_id',
         'telegram_name',
       )} on conflict (telegram_id) do update set telegram_name = excluded.telegram_name`;
+      console.log('expr', dayjs(parsedData.authDate).toDate().toLocaleString())
       return {
         token: jwt.sign(
           {
             data: parsedData,
-            exp: dayjs(parsedData.authDate).unix(),
+            exp: dayjs(parsedData.authDate).unix() + 86400 * 7 ,
           },
           process.env.BOT_TOKEN!,
         ),

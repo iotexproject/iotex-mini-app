@@ -4,7 +4,6 @@ import { InitDataParsed, retrieveLaunchParams, User } from '@telegram-apps/sdk-r
 import { useEffect } from 'react';
 import { TaskStore } from './task';
 
-
 export class UserStore implements Store {
   sid = 'user';
   autoObservable = false;
@@ -12,7 +11,7 @@ export class UserStore implements Store {
   token: string = '';
   initDataRaw: string = '';
   userInfo: User | null;
- 
+
   get isLogin() {
     return !!this.token;
   }
@@ -20,30 +19,37 @@ export class UserStore implements Store {
   async login() {
     try {
       const { token } = await api.auth.signin.mutate({ initData: this.initDataRaw });
-      this.token = token;
-      console.log('token', this.initDataRaw, this.userInfo, token)
-      RootStore.Get(TaskStore).getTasks.call()
+      if (token) {
+        this.token = token;
+        localStorage.setItem('token', token);
+        RootStore.Get(TaskStore).publicData();
+      }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error('Login failed:', error);
     }
   }
 
-  initData({initDataRaw, initData} : {initDataRaw: string; initData: InitDataParsed}) {
+  initData({ initDataRaw, initData }: { initDataRaw: string; initData: InitDataParsed }) {
     this.setData({ userInfo: initData.user, initDataRaw });
-    const token = localStorage.getItem('')
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.token = token;
+      RootStore.Get(TaskStore).publicData();
+    } else {
+      this.login();
+    }
   }
 
   setData(args: Partial<UserStore>) {
     Object.assign(this, args);
   }
 
-  use( ) {
+  use() {
     const { initDataRaw, initData } = retrieveLaunchParams();
 
     useEffect(() => {
       if (initDataRaw && initData) {
         this.initData({ initDataRaw, initData });
-        this.login();
       }
     }, [initDataRaw, initData]);
   }

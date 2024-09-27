@@ -1,5 +1,6 @@
 
 import { InitDataParsed } from '@telegram-apps/sdk-react';
+import { TRPCError } from '@trpc/server';
 import type * as trpcNext from '@trpc/server/adapters/next';
 import jwt from 'jsonwebtoken';
 
@@ -26,7 +27,7 @@ export async function createContext(
   try {
     user = jwt.verify(bearToken, process.env.BOT_TOKEN!)
   } catch (error) {
-    
+    console.error('error', error)
   }
   return {
     user
