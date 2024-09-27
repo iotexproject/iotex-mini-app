@@ -30,7 +30,7 @@ const SharePage = observer(() => {
                   <Icon icon="solar:refresh-outline" className="text-white w-5 h-5" />
                 </div>
               )}
-              <div className="flex-1 flex flex-col gap-1">
+              <div className="flex-1 flex flex-col">
                 <div className="text-sm">{item.title}</div>
                 <div className="text-primary text-xs">{item.description}</div>
               </div>
@@ -43,7 +43,7 @@ const SharePage = observer(() => {
                     task.doTask.call(item.id);
                   }}
                 >
-                  Go
+                  {item.isCompleted ? 'Done' : 'Go'} ({item.point})
                 </Button>
               </div>
             </div>
