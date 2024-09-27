@@ -2,10 +2,16 @@ import { PromiseState, RootStore, Store } from '@dappworks/kit';
 import { api } from '@/lib/trpc';
 import { useEffect } from 'react';
 import { UserStore } from './user';
+import { ToastPlugin } from '@dappworks/kit/plugins';
 
 export class TaskStore implements Store {
   sid = 'tasks';
   autoObservable = false;
+  isCheckIn: boolean = false
+
+  get toast() {
+    return RootStore.Get(ToastPlugin);
+  }
 
   get user() {
     return RootStore.Get(TaskStore);
@@ -15,7 +21,8 @@ export class TaskStore implements Store {
     function: async () => {
       try {
         const data = await api.task.tasks.query();
-        return data
+        this.isCheckIn = data.find(item => item.id === 1)?.isCompleted || false
+        return data.filter(item => item.id !== 1)
       } catch (error) {
         console.error('GetTasks failed:', error);
       }
@@ -40,8 +47,8 @@ export class TaskStore implements Store {
           id
         });
         if(data) {
-          this.getTasks.call()
-          this.getTotalPoint.call()
+          this.toast.success('Success !')
+          this.publicData()
         }
       } catch (error) {
         console.error('DoTask failed:', error);

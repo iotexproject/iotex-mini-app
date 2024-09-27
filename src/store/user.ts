@@ -22,7 +22,6 @@ export class UserStore implements Store {
       if (token) {
         this.token = token;
         localStorage.setItem('token', token);
-        RootStore.Get(TaskStore).publicData();
       }
     } catch (error) {
       console.error('Login failed:', error);
@@ -34,7 +33,6 @@ export class UserStore implements Store {
     const token = localStorage.getItem('token');
     if (token) {
       this.token = token;
-      RootStore.Get(TaskStore).publicData();
     } else {
       this.login();
     }
@@ -52,5 +50,12 @@ export class UserStore implements Store {
         this.initData({ initDataRaw, initData });
       }
     }, [initDataRaw, initData]);
+
+
+    useEffect(() => {
+      if(this.token) {
+        RootStore.Get(TaskStore).publicData();
+      }
+    }, [this.token])
   }
 }

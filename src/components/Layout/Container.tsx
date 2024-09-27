@@ -29,8 +29,8 @@ function Container(props: ContainerProps) {
       <main id="skip" className={cn('h-full py-6 px-4 box-border', className)}>
         {children}
       </main>
-      <Footer />
       <MyAppProvider />
+      <Footer />
     </div>
   );
 }
