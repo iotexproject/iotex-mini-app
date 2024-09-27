@@ -10,6 +10,9 @@ const SharePage = observer(() => {
 
   return (
     <Container className="flex flex-col h-full pb-8 overflow-y-auto gap-4">
+      <div className="font-semibold text-lg flex items-center">
+        <span>Tasks</span>
+      </div>
       {task.getTasks.loading.value ? (
         [1, 2, 3, 4, 5].map((item, index) => {
           return <Skeleton key={index} className="h-12 w-full rounded-lg" />;
@@ -32,9 +35,14 @@ const SharePage = observer(() => {
                 <div className="text-primary text-xs">{item.description}</div>
               </div>
               <div>
-                <Button size="sm" isDisabled={item.isCompleted} color="secondary" onClick={() => {
-                  task.doTask.call(item.id)
-                }}>
+                <Button
+                  size="sm"
+                  isDisabled={item.isCompleted}
+                  color="secondary"
+                  onClick={() => {
+                    task.doTask.call(item.id);
+                  }}
+                >
                   Go
                 </Button>
               </div>
