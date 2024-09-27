@@ -16,7 +16,7 @@ const Home = observer(() => {
 
   return (
     <Container className="flex flex-col gap-6">
-      {task.getTotalPoint.loading.value ? (
+      {task.getTotalPoint.loading.value && task.getTasks.loading.value ? (
         <>
           <Skeleton className='w-full h-8 rounded-lg' />
           <Skeleton className='w-full h-[230px] rounded-lg' />

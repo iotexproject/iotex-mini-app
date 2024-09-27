@@ -3,6 +3,7 @@ import { api } from '@/lib/trpc';
 import { InitDataParsed, retrieveLaunchParams, User } from '@telegram-apps/sdk-react';
 import { useEffect } from 'react';
 import { TaskStore } from './task';
+import { ToastPlugin } from '@dappworks/kit/plugins';
 
 export class UserStore implements Store {
   sid = 'user';
@@ -11,6 +12,10 @@ export class UserStore implements Store {
   token: string = '';
   initDataRaw: string = '';
   userInfo: User | null;
+
+  get toast() {
+    return RootStore.Get(ToastPlugin);
+  }
 
   get isLogin() {
     return !!this.token;
@@ -24,6 +29,7 @@ export class UserStore implements Store {
         localStorage.setItem('token', token);
       }
     } catch (error) {
+      this.toast.error('Login failed:' + error.message)
       console.error('Login failed:', error);
     }
   }

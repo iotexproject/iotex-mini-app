@@ -19,11 +19,11 @@ const SharePage = observer(() => {
           {task.getTasks.value?.map((item, index) => (
             <div key={item.title} className="p-2 border border-solid border-gray-400 rounded-lg flex items-center gap-2">
               {item.isCompleted ? (
-                <div className="p-1 rounded-full bg-green-300 ">
+                <div className="p-1 rounded-full bg-green-300 w-5 h-5 flex-none">
                   <Icon icon="mdi:success" className="text-white w-5 h-5" />
                 </div>
               ) : (
-                <div className="p-1 rounded-full bg-gray-400">
+                <div className="p-1 rounded-full bg-gray-400 w-5 h-5 flex-none">
                   <Icon icon="solar:refresh-outline" className="text-white w-5 h-5" />
                 </div>
               )}
@@ -32,7 +32,7 @@ const SharePage = observer(() => {
                 <div className="text-primary text-xs">{item.description}</div>
               </div>
               <div>
-                <Button size="sm" color="secondary" onClick={() => {
+                <Button size="sm" isDisabled={item.isCompleted} color="secondary" onClick={() => {
                   task.doTask.call(item.id)
                 }}>
                   Go
