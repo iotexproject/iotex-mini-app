@@ -11,6 +11,10 @@ import { ErrorPage } from '@/components/ErrorPage';
 import { useTelegramMock } from '@/hooks/useTelegramMock';
 import { useDidMount } from '@/hooks/useDidMount';
 import { initStore } from '@/store';
+import { WagmiProvider } from 'wagmi';
+import { config } from '@/lib/wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient();
 
 const InitProvider = ({ children }) => {
   const lp = useLaunchParams();
@@ -45,17 +49,21 @@ const MyApp = ({ Component, pageProps }) => {
   }
 
   return didMount ? (
-    <NextUIProvider>
-      <ThemeProvider attribute="class" enableSystem={false}>
-        <SDKProvider acceptCustomStyles debug={true}>
-          <InitProvider>
-            <ErrorBoundary fallback={ErrorPage}>
-              <Component {...pageProps} />
-            </ErrorBoundary>
-          </InitProvider>
-        </SDKProvider>
-      </ThemeProvider>
-    </NextUIProvider>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <NextUIProvider>
+          <ThemeProvider attribute="class" enableSystem={false}>
+            <SDKProvider acceptCustomStyles debug={true}>
+              <InitProvider>
+                <ErrorBoundary fallback={ErrorPage}>
+                  <Component {...pageProps} />
+                </ErrorBoundary>
+              </InitProvider>
+            </SDKProvider>
+          </ThemeProvider>
+        </NextUIProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   ) : (
     <div className="root__loading">Loading</div>
   );

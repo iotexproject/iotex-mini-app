@@ -220,5 +220,8 @@ export const helper = {
       }
       return flag;
     },
+    isIos() {
+      return typeof window !== 'undefined' && window.navigator?.userAgent?.toLowerCase().includes('ios')
+    }
   },
 };

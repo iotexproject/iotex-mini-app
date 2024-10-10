@@ -7,20 +7,26 @@ import { RootStore } from '@dappworks/kit';
 import { BaseStore } from '@/store/base';
 import { TaskStore } from '@/store/task';
 import { ToastPlugin } from '@dappworks/kit/plugins';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useSendTransaction, useSignMessage } from '@/lib/wagmi';
 
 const Home = observer(() => {
   const task = RootStore.Get(TaskStore);
   const { initData, initDataRaw } = retrieveLaunchParams();
-
+  const account = useAccount();
+  const { connectors, connect, status, error } = useConnect();
+  const { disconnect } = useDisconnect();
+  const { signMessage } = useSignMessage();
+  const { sendTransaction } = useSendTransaction();
   console.log('init', initData, initDataRaw);
 
   return (
     <Container className="flex flex-col gap-6">
       {task.getTotalPoint.loading.value && task.getTasks.loading.value ? (
         <>
-          <Skeleton className='w-full h-8 rounded-lg' />
-          <Skeleton className='w-full h-[230px] rounded-lg' />
-          <Skeleton className='mt-8 w-32 h-32 mx-auto rounded-full' />
+          <Skeleton className="w-full h-8 rounded-lg" />
+          <Skeleton className="w-full h-[230px] rounded-lg" />
+          <Skeleton className="mt-8 w-32 h-32 mx-auto rounded-full" />
         </>
       ) : (
         <>
@@ -44,6 +50,13 @@ const Home = observer(() => {
           >
             {task.isCheckIn ? <Icon icon="mdi:success" className="text-white w-10 h-10" /> : 'CHECK IN'}
           </Button>
+          {!account.isConnected ? (
+            <Button className="button is-glowing w-full mt-4 modal_open" onClick={() => connect({ connector: connectors[0]! })}>
+              Connect {connectors[0]?.name}
+            </Button>
+          ) : (
+            <Button onClick={() => disconnect()}>Disconnect</Button>
+          )}
         </>
       )}
     </Container>
