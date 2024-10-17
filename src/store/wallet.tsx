@@ -2,11 +2,10 @@
 import { helper } from '@dappworks/kit/utils';
 import { Store } from "@dappworks/kit";
 import { Button } from "@nextui-org/react";
-import { extend } from "dayjs";
 import { observer } from "mobx-react-lite";
 import { encodeFunctionData, SignableMessage } from "viem";
-import { Config, useAccount, useConnect, useDisconnect, useSendTransaction, useSignMessage, useTransaction, useTransactionReceipt, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
-import { SendTransactionMutateAsync, SignMessageMutateAsync, WaitForTransactionReceiptData, WriteContractMutateAsync } from "wagmi/query";
+import { Config, useAccount, useConnect, useDisconnect, useSendTransaction, useSignMessage,  useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import { SendTransactionMutateAsync, SignMessageMutateAsync,  WriteContractMutateAsync } from "wagmi/query";
 
 export class WalletStore implements Store {
   sid = 'WalletStore';
