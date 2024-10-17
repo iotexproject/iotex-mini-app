@@ -49,6 +49,7 @@ export const taskRouter = router({
           event_id: eventIdRes.event_id
         }
       })
+      //@ts-ignore
       const eventRes = (await kitDBService.analysis.batch_fetch_event({
         event_ids: dataWithEventId.map((task) => task.event_id),
       })) as any [] 
@@ -62,6 +63,7 @@ export const taskRouter = router({
       
     }),
   totalPoint: publicProcedure.output(z.number()).query(async ({ ctx }) => {
+    //@ts-ignore
     const res = await kitDBService.analysis.fetch_user_point({
       user_id: String(ctx.user?.data.user?.id!),
     });
@@ -104,6 +106,7 @@ export const taskRouter = router({
         message: eventIdRes.errMsg,
       })
     }
+    //@ts-ignore
     const eventPushRes = await kitPostDBService.analysis.upload_event({
       event_type: "point",
       user_id: String(ctx.user?.data.user?.id!),
