@@ -49,8 +49,11 @@ const Home = observer(() => {
               //   functionName,
               //   args,
               // })
+
+              //approce example
               const tx = await wallet.sendTransaction({
-                to: '0x610CBDa6f0037B4141A5B949f56479106BeCb1E9',
+                value:'0x095ea7b3000000000000000000000000610cbda6f0037b4141a5b949f56479106becb1e9000000000000000000000000000000000000000000000000000000000000000a'
+                to: '0xa00744882684c3e4747faefd68d283ea44099d03',
                 value: 1e18.toString()
               })
               alert(tx)
