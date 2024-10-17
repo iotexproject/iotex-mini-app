@@ -40,7 +40,6 @@ export class WalletStore implements Store {
   waitForTransactionReceiptData: any | null = null;
   async sendTransaction({ data, value, to }: { data?: `0x${string}`, value?: string, to: `0x${string}` }) {
     return new Promise(async (res, rej) => {
-      alert('The transaction has been sent, please manually switch to the wallet')
       const hash = await this.sendTransactionAsync!({
         to,
         data: data ?? undefined,
@@ -50,6 +49,7 @@ export class WalletStore implements Store {
           rej(err)
         }
       });
+      alert('The transaction has been sent, please manually switch to the wallet')
       const interval = setInterval(() => {
         if (this.waitForTransactionReceiptData?.isSuccess) {
           clearInterval(interval)
