@@ -48,13 +48,13 @@ export class WalletStore implements Store {
           rej(err)
         }
       });
-      alert('The transaction has been sent, please manually switch to the wallet')
       const interval = setInterval(() => {
         if (this.waitForTransactionReceiptData?.isSuccess) {
           clearInterval(interval)
           res(hash)
         }
       }, 1000)
+      alert('The transaction has been sent, please manually switch to the wallet')
     })
   }
 
