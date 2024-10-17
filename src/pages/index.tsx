@@ -4,20 +4,14 @@ import { Icon } from '@iconify/react';
 import Container from '@/components/Layout/Container';
 import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { RootStore } from '@dappworks/kit';
-import { BaseStore } from '@/store/base';
 import { TaskStore } from '@/store/task';
-import { ToastPlugin } from '@dappworks/kit/plugins';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { useSendTransaction, useSignMessage } from '@/lib/wagmi';
+import { WalletStore } from '@/store/wallet';
 
 const Home = observer(() => {
   const task = RootStore.Get(TaskStore);
+  const wallet = RootStore.Get(WalletStore)
+  wallet.use()
   const { initData, initDataRaw } = retrieveLaunchParams();
-  const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
-  const { disconnect } = useDisconnect();
-  const { signMessage } = useSignMessage();
-  const { sendTransaction } = useSendTransaction();
   console.log('init', initData, initDataRaw);
 
   return (
@@ -35,6 +29,7 @@ const Home = observer(() => {
               <Avatar size="sm" src="/images/logo.svg"></Avatar>
               <span>Hi,{initData?.user?.firstName}</span>
             </div>
+            <wallet.ConnectButton />
             <div className="flex items-center gap-2 cursor-pointer">{/* <Icon icon="ph:wallet-bold" className="w-8 h-8" /> */}</div>
           </div>
           <div className="flex flex-col items-center justify-center rounded-lg h-[230px] shadow-lg bg-gradient-to-b from-[#865eff] to-[#65ead2]">
@@ -50,13 +45,27 @@ const Home = observer(() => {
           >
             {task.isCheckIn ? <Icon icon="mdi:success" className="text-white w-10 h-10" /> : 'CHECK IN'}
           </Button>
-          {!account.isConnected ? (
-            <Button className="button is-glowing w-full mt-4 modal_open" onClick={() => connect({ connector: connectors[0]! })}>
-              Connect {connectors[0]?.name}
-            </Button>
-          ) : (
-            <Button onClick={() => disconnect()}>Disconnect</Button>
-          )}
+          <div className='flex items-center justify-center gap-2'>
+            <Button onClick={async e => {
+              const signature = await wallet.signMessage("I am Message")
+              alert(signature)
+            }}>SignMessage</Button>
+            <Button onClick={async e => {
+              //if you want writeContract use encodeFunctionData
+              // encodeFunctionData({
+              //   abi,
+              //   functionName,
+              //   args,
+              // })
+              const tx = await wallet.sendTransaction({
+                to: '0x610CBDa6f0037B4141A5B949f56479106BeCb1E9',
+                value: 1e18.toString()
+              })
+              alert(tx)
+            }}>SendTransation</Button>
+          </div>
+
+
         </>
       )}
     </Container>

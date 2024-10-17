@@ -10,23 +10,28 @@ if (typeof window != "undefined") {
     };
   })(window.open);
 }
-
+// https://explorer.walletconnect.com/
 export const config = createConfig({
-  chains: [iotexTestnet],
+  chains: [iotex],
   connectors: [
-    // injected(),
-    // coinbaseWallet(),
     walletConnect({
       projectId: "b69e844f38265667350efd78e3e1a5fb",
       qrModalOptions: {
         explorerRecommendedWalletIds: [
+          //iopay
           "1a5f2435e8e31c4034f1d142e85d9f7d3be2a09ddf710e5ef1ad4e36c719d3c0",
+          //metamast
+          "c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96",
+          //okx
+          "971e689d0a5be527bac79629b4ee9b925e82208e5168b733496a09c0faed0709",
+          //binace
+          "8a0ee50d1f22f6651afcae7eb4253e52a3310b90af5daef78a8c4929a9bb99d4",
         ],
       },
     }),
   ],
   transports: {
-    [iotexTestnet.id]: http(),
+    [iotex.id]: http(),
   },
 });
 
@@ -38,10 +43,10 @@ export const config = createConfig({
 // });
 
 export const useSendTransaction = <
-config extends Config = ResolvedRegister['config'],
-context = unknown,
+  config extends Config = ResolvedRegister['config'],
+  context = unknown,
 >() => {
-  const {sendTransactionAsync, sendTransaction,...rest} = useSendTransactionWagmi<config, context>()
+  const { sendTransactionAsync, sendTransaction, ...rest } = useSendTransactionWagmi<config, context>()
   return {
     ...rest,
     sendTransactionAsync: async (...data: Parameters<typeof sendTransactionAsync>) => {
@@ -56,7 +61,7 @@ context = unknown,
 }
 
 export const useSignMessage = <context = unknown>() => {
-  const {signMessageAsync, signMessage,...rest} = useSignMessageWagmi<context>()
+  const { signMessageAsync, signMessage, ...rest } = useSignMessageWagmi<context>()
   return {
     ...rest,
     signMessageAsync: async (...data: Parameters<typeof signMessageAsync>) => {
