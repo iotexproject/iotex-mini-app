@@ -1,11 +1,12 @@
 
 import { helper } from '@dappworks/kit/utils';
-import { Store } from "@dappworks/kit";
+import { RootStore, Store } from "@dappworks/kit";
 import { Button } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { encodeFunctionData, SignableMessage } from "viem";
-import { Config, useAccount, useConnect, useDisconnect, useSendTransaction, useSignMessage,  useWaitForTransactionReceipt, useWriteContract } from "wagmi";
-import { SendTransactionMutateAsync, SignMessageMutateAsync,  WriteContractMutateAsync } from "wagmi/query";
+import { Config, useAccount, useConnect, useDisconnect, useSendTransaction, useSignMessage, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import { SendTransactionMutateAsync, SignMessageMutateAsync, WriteContractMutateAsync } from "wagmi/query";
+import { ToastPlugin } from '@dappworks/kit/plugins';
 
 export class WalletStore implements Store {
   sid = 'WalletStore';
@@ -39,6 +40,9 @@ export class WalletStore implements Store {
   waitForTransactionReceiptData: any | null = null;
   async sendTransaction({ data, value, to }: { data?: `0x${string}`, value?: string, to: `0x${string}` }) {
     return new Promise(async (res, rej) => {
+      RootStore.Get(ToastPlugin).success("The transaction has been sent, please manually switch to the wallet", {
+        duration: 5000
+      })
       const hash = await this.sendTransactionAsync!({
         to,
         data: data ?? undefined,
