@@ -36,15 +36,7 @@ const Home = observer(() => {
             <div className="text-base text-white mb-2">Total Points</div>
             <div className="text-white font-bold text-[40px]">{task.getTotalPoint.value ?? 0}</div>
           </div>
-          <Button
-            isDisabled={task.isCheckIn}
-            className="flex items-center justify-center mt-8 w-32 h-32 mx-auto rounded-full shadow-md bg-gradient-to-l from-[#865eff] to-[#73F1D9] text-white font-bold cursor-pointer"
-            onClick={() => {
-              task.doTask.call(1);
-            }}
-          >
-            {task.isCheckIn ? <Icon icon="mdi:success" className="text-white w-10 h-10" /> : 'CHECK IN'}
-          </Button>
+         
           <div className='flex items-center justify-center gap-2'>
             <Button onClick={async e => {
               const signature = await wallet.signMessage("I am Message")
@@ -64,7 +56,15 @@ const Home = observer(() => {
               alert(tx)
             }}>SendTransation</Button>
           </div>
-
+          <Button
+            isDisabled={task.isCheckIn}
+            className="flex items-center justify-center mt-8 w-32 h-32 mx-auto rounded-full shadow-md bg-gradient-to-l from-[#865eff] to-[#73F1D9] text-white font-bold cursor-pointer"
+            onClick={() => {
+              task.doTask.call(1);
+            }}
+          >
+            {task.isCheckIn ? <Icon icon="mdi:success" className="text-white w-10 h-10" /> : 'CHECK IN'}
+          </Button>
 
         </>
       )}

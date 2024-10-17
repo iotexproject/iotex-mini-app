@@ -3,10 +3,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 module.exports = withBundleAnalyzer({
   reactStrictMode: false,
-  webpack(config) {
-    config.infrastructureLogging = { debug: /PackFileCache/ }
-    return config;
-  },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
